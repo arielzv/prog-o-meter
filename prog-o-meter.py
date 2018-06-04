@@ -33,8 +33,8 @@ class ProgressGUI(object):
         days: the number of days the user have completed.
         GOAL: The number of days the user is trying to complete (hardcoded to be 100, but might wanna add feature for user to chooses this themselves in the future).
         rectagle_list = a list of all rectangle elements to be displayed on canvas.
-    """ 
-    
+    """
+
     def __init__(self, user, _logname):
         """Open a Tkinter window showing the prog-o-meter, a greeting text, and a button to add a new day to progress.
 
@@ -55,7 +55,7 @@ class ProgressGUI(object):
         self.rectangle_list = []
         self.encourage = ["Nice Job!", "The force is strong with you!", "Well Done!", "You are doing it!", "Never, never, never give up.", "If you dream it, you can do it.", "Everything you can imagine is real.", "Hope is a waking dream.", "You are the best!", "Always believe in yourself."]
         self.days_remaining = self.GOAL - self.days
-        self.completion_date = self.get_completion_date(self.days_remaining-1)
+        self.completion_date = self.get_completion_date(self.days_remaining)
         self.current_greeting = 0
         # Tkinter instantiation
         self.canvas_layout()
@@ -89,14 +89,14 @@ class ProgressGUI(object):
 
     def button_layout(self):
         """Display a button with the text "1 more day!" and a button with the text "Log" on the canvas.
-        
-        Creates and display a button with the text "1 more day!" with the function add_day() as callback function. If user have already reached their goal, the button is displayed, but is disabled. 
+
+        Creates and display a button with the text "1 more day!" with the function add_day() as callback function. If user have already reached their goal, the button is displayed, but is disabled.
         Creates and displays a button with the text "Make log entry", with the function log_entry() as callback function.
-       
+
         Attributes:
             add_day_button: A button with the text "1 more day!", which calls the function add_day
             add_log_button: A button with the text "Make log entry", which calls the function log_entry
-            
+
         """
         self.add_day_button = Tk.Button(self.root, text = "1 more day!", command = self.add_day)
         self.add_day_button.pack()
@@ -166,7 +166,7 @@ class ProgressGUI(object):
             self.add_day_button.config(state = "disabled")
             self.canvas.itemconfig(self.greeting, text=("".join(("Congrats! ", self.username))))
             Congratulations()        # Open congratulations window with link to share on Twitter
-    
+
     def new_no(self, current_greeting):
         """Allows to choose a new encouragement from the list each time the button is clicked so that the encouragements are not repeated.
             Attributes:
@@ -178,7 +178,7 @@ class ProgressGUI(object):
             new = randint(0, 9)        #get a new random integer between 0-9
         self.current_greeting = new
         return self.current_greeting
-    
+
     def log_entry(self):
         """Opens a new window for user to make a new log entry. The user can make any number of entries they wish.
 
@@ -202,7 +202,7 @@ class ProgressGUI(object):
 
         def update_log():
             """Updates the log with the text the user typed into the text widget.
-            
+
             Calls update_log_file to save the text to the [USERNAME]_log.txt file.
             """
             input_value = text_box.get("1.0",'end-1c')
@@ -215,7 +215,7 @@ class ProgressGUI(object):
         save.pack(side=Tk.LEFT, expand=True)
         clear.pack(side=Tk.LEFT, expand=True)
         close.pack(side=Tk.LEFT, expand=True)
-        
+
 class StartGUI(object):
 
     """Class contains everything related to starting up the application as a new or returning user.
@@ -357,8 +357,8 @@ def update_log_file(_logname, _log_entry):
     """ Updates the file [username]_log.txt, adding user's latest update.
 
     The timestamp is added above the update, with a newline in between. A newline is also added after the update.
-    
-    Args: 
+
+    Args:
         _logname: Name of the file to be updated. Should have format [username]_log.txt (username in all lowercase).
         _log_entry: The text which is to be appended to the file.
     """
